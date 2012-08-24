@@ -85,11 +85,10 @@ namespace Labs.Filtering
 
             foreach (var column in Columns)
             {
-                try
-                {
-                    column.SortDirection = view.SortDescriptions[Helpers.FindSortDescription(view.SortDescriptions, column.SortMemberPath)].Direction;
-                }
-                catch { }
+             
+                 var sd = Helpers.FindSortDescription(view.SortDescriptions, column.SortMemberPath);
+                 if (sd.HasValue)
+                     column.SortDirection = sd.Value.Direction;
             }
 
             if (e.Column.SortDirection.HasValue)
@@ -176,31 +175,6 @@ namespace Labs.Filtering
             }
         }
 
-        private void DataGrid_Standard_Sorting(object sender, DataGridSortingEventArgs e)
-        {
-
-            DataGrid dataGrid = sender as DataGrid;
-
-            string sortPropertyName = Helpers.GetSortMemberPath(e.Column);
-
-            if (!string.IsNullOrEmpty(sortPropertyName))
-            {
-                // sorting is cleared when the previous state is Descending
-                if (e.Column.SortDirection.HasValue && e.Column.SortDirection.Value == ListSortDirection.Descending)
-                {
-                    int index = Helpers.FindSortDescription(dataGrid.Items.SortDescriptions, sortPropertyName);
-                    if (index != -1)
-                    {
-                        e.Column.SortDirection = null;
-                        // remove the sort description
-                        dataGrid.Items.SortDescriptions.RemoveAt(index);
-                        dataGrid.Items.Refresh();
-                        // stop the default sort
-                        e.Handled = true;
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// The logic for filtering
