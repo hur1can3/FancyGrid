@@ -16,7 +16,7 @@ namespace Labs.Filtering
     /// <summary>
     /// A grid that makes inline filtering possible.
     /// </summary>
-    public class FilteringDataGrid : DataGrid
+    public class FilteringDataGrid : Microsoft.Windows.Controls.DataGrid
     {
         /// <summary>
         /// This dictionary will have a list of all applied filters
@@ -79,7 +79,7 @@ namespace Labs.Filtering
             Sorting += FilteringDataGrid_Sorting;
         }
 
-        void FilteringDataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        void FilteringDataGrid_Sorting(object sender, Microsoft.Windows.Controls.DataGridSortingEventArgs e)
         {
             var view = CollectionViewSource.GetDefaultView(Items);
 
