@@ -69,13 +69,8 @@ namespace Labs.Filtering
             // Add a handler for all text changes
             AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler(OnTextChanged), true);
 
-            // Datacontext changed, so clear the cache
             DataContextChanged += new DependencyPropertyChangedEventHandler(FilteringDataGrid_DataContextChanged);
 
-            // To enable multisort
-            //CanUserSortColumns = false;
-            //MouseLeftButtonUp += FilteringDataGrid_MouseLeftButtonUp;
-            //Sorting += DataGrid_Standard_Sorting;
             Sorting += FilteringDataGrid_Sorting;
         }
 

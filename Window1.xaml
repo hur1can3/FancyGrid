@@ -8,6 +8,5 @@
   
     <Grid>
         <local:FilteringDataGrid IsFilteringCaseSensitive="False" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="True" x:Name="dataGrid1"/>
-        <Canvas HorizontalAlignment="Left" Height="14.925" Margin="524.358,-90.179,0,0" VerticalAlignment="Top" Width="13.433"/>
     </Grid>
 </Window>
