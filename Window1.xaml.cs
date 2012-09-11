@@ -11,9 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Windows.Controls;
 
-namespace Labs.Filtering
+namespace FancyGrid
 {
     /// <summary>
     /// Interaction logic for Window1.xaml

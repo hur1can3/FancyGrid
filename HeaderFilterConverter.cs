@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Text;
 using System.IO;
 
-namespace Labs.Filtering
+namespace FancyGrid
 {
     /// <summary>
     /// This converter will:
@@ -29,11 +29,32 @@ namespace Labs.Filtering
             // Get values
             string filter = values[0] as string;
             string headerText = values[1] as string;
+            string filtertype = "";
+
+            if (filter.StartsWith("<"))
+                filtertype = "Less Than";
+            else if (filter.StartsWith(">"))
+                filtertype = "Greater Than";
+            else if (filter.StartsWith("="))
+                filtertype = "Exactly";
+            else if (filter.StartsWith("!"))
+                filtertype = "Not";
+            else if (filter.StartsWith("~"))
+                filtertype = "Doesn't Contain";
+            else if (filter.StartsWith(@""""))
+                filtertype = "Blank";
+            else if (filter.Equals("*"))
+                filtertype = "Any";
+            else
+                filtertype = "Contains";
+
+
+
 
             // Generate header text
             string text = "{0}{3}" + headerText + " {4}";
             if (!String.IsNullOrEmpty(filter))
-                text += "(Filter: {2}" + values[0] + "{4})";
+                text += "({2}" + filtertype + "{4})";
             text += "{1}";
 
             // Escape special XML characters like <>&'
