@@ -69,9 +69,25 @@ namespace FancyGrid
 
             //Set up context menus
             ContextMenuOpening += FilteringDataGrid_ContextMenuOpening;
+            
+             AutoGeneratingColumn+=FilteringDataGrid_AutoGeneratingColumn;
 
 
         }
+        
+             private void FilteringDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (!e.Column.CanUserSort)
+            {
+                Type type=e.PropertyType;
+                if (type.IsGenericType&&type.IsValueType&&typeof(IComparable).IsAssignableFrom(type.GetGenericArguments()[0]))
+                {
+                    // allow nullable primitives to be sorted
+                    e.Column.CanUserSort=true;
+                }
+            }
+        } 
+
 
         void FilteringDataGrid_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
